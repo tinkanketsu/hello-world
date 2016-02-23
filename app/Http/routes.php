@@ -24,6 +24,8 @@ Route::get('/', 'HomeController@index');
 |
 */
 
+Route::resource('shop','ShopController', ['only' => ['index','create','store','edit','update']]);
+
 Route::group(['middleware' => ['web']], function () {
     //
 });

@@ -23,11 +23,12 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Salon</div>
+                <div class="title">Salon List</div>
                 @foreach($shops as $shop)
                 <div>{{{ $shop->name }}}</div>
                 @endforeach
             </div>
+            <a href="{{action("ShopController@create")}}">Add new salon</a>
         </div>
     </body>
 </html>

@@ -23,10 +23,12 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Salon</div>
-                @foreach($shops as $shop)
-                <div>{{{ $shop->name }}}</div>
-                @endforeach
+                <div class="title">Add new shop</div>
+                
+                <form action="{{ action("ShopController@store") }}" method="post">
+                    <input type="text" name="name">
+
+                </form>
             </div>
         </div>
     </body>
