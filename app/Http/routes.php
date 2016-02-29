@@ -24,8 +24,11 @@ Route::get('/', 'HomeController@index');
 |
 */
 
-Route::resource('shop','ShopController', ['only' => ['index','create','store','edit','update']]);
+Route::resource('shop','ShopController', ['only' => ['index','create','store','edit/id','update']]);
 
 Route::group(['middleware' => ['web']], function () {
-    //
+	Route::get('shop/create','ShopController@create');
+	Route::post('shop/store','ShopController@store');
+	Route::get('shop/edit/{id}','ShopController@edit');
+	Route::post('shop/update/{id}','ShopController@update');
 });

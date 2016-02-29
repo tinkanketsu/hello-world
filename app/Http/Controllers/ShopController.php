@@ -49,17 +49,16 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-        //
-
         $validator = $this->shop->validate($request->all());
 
         if($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withErrors($validator->errors())->withInput();
         }
 
-        $shop = $this->shop->store($request->all());
-
-        return redirect(action("ShopController@edit", $shop->id));
+        // 登録
+        $shop = $this->shop->store($request);
+        
+       return redirect(action("ShopController@edit", $shop->id));
     }
 
     /**
@@ -70,9 +69,12 @@ class ShopController extends Controller
      */
     public function edit($id)
     {
+    	// idからshop情報を取得
         $shop = $this->shop->get($id);
-
-        return view("admin.shops.edit");
+        
+        return view("admin.shops.edit", [
+        	"shop" => $shop
+        ]);
     }
 
     /**
@@ -84,7 +86,16 @@ class ShopController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = $this->shop->validate($request->all());
+
+        if($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput();
+        }
+    	
+    	// 更新
+        $shop = $this->shop->update($request);
+        
+        return redirect(action("ShopController@edit", $shop->id));
     }
 
     /**
